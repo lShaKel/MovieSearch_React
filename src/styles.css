@@ -7,6 +7,13 @@ body{
   border-radius: 5px;
   box-shadow: 0 4px 4px -4px rgba(12, 12, 13, 0.05), 0 16px 32px -4px rgba(12, 12, 13, 0.1);
 }
+ul {
+  padding-inline: 0;
+}
+
+li {
+  list-style: none;
+}
 
 html.dark{
   background-color:floralwhite ;
@@ -16,11 +23,39 @@ html {
   background-color:dimgray;
 }
 
+.button {
+  background-color: black;
+  color: whitesmoke;
+  border-radius: 10px;
+  border: none;
+
+  transition-duration: 0.3s;
+
+  &:not(:disabled) {
+    &:hover {
+      background-color: whitesmoke;
+      color: black;
+    }
+
+    &:active {
+      scale: 1.05;
+    }
+  }
+}
+
+
 .search__form{
   display:flex;
   column-gap: 10px;
   padding-block: 20px;
   height: 20px;
+}
+
+.search__list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .error{
@@ -37,12 +72,15 @@ html {
 }
 
 .filters{
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 5px;
+  gap: 5px;
 }
 
 .switch-button,
 .load-button{
-  width: 50%;
+  width: 100%;
 }
 
 .loader{
