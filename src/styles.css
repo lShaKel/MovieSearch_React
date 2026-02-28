@@ -6,6 +6,12 @@ body{
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: 0 4px 4px -4px rgba(12, 12, 13, 0.05), 0 16px 32px -4px rgba(12, 12, 13, 0.1);
+
+  background-color: dimgray;
+}
+
+body.white{
+  background-color: floralwhite;
 }
 ul {
   padding-inline: 0;
@@ -13,14 +19,6 @@ ul {
 
 li {
   list-style: none;
-}
-
-html.dark{
-  background-color:floralwhite ;
-}
-
-html {
-  background-color:dimgray;
 }
 
 .button {
@@ -46,21 +44,27 @@ html {
 
 .search__form{
   display:flex;
+  align-items: center;
+  justify-content: center;
   column-gap: 10px;
   padding-block: 20px;
   height: 20px;
 }
 
 .search__list {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 45px;
   flex-direction: column;
 }
 
-.error{
+.search__empty-message{
   color: red;
   text-align: center;
+  padding-block: 100px;
+  font-size: 50px;
+  font-weight: 700;
+
 }
 
 .title{

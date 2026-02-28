@@ -1,6 +1,8 @@
 const Field =  (props) => {
   const  {
     id,
+    value,
+    onInput,
     children,
   } = props
 
@@ -17,6 +19,8 @@ const Field =  (props) => {
         id={id}
         placeholder=" "
         autoComplete="off"
+        value = {value}
+        onInput={onInput}
       />
     </div>
   )

@@ -5,6 +5,8 @@ const FiltersButtons = (props) => {
     loadMoreClass,
     switchClass,
     type,
+    loadMore,
+    switchList,
   } = props
 
   return (
@@ -12,12 +14,14 @@ const FiltersButtons = (props) => {
       <Button
         className ={loadMoreClass}
         type ={type}
+        onClick = {loadMore}
       >
         Load more
       </Button>
       <Button
         className ={switchClass}
         type = {type}
+        onClick = {switchList}
       >
         Popular / Top rated
       </Button>

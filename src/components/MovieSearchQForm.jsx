@@ -1,15 +1,27 @@
 import Field from "./Field.jsx";
 import Button from "./Button.jsx";
 
-const MovieSearchQForm = () => {
+const MovieSearchQForm = (props) => {
+  const {
+    query,
+    handleQuery,
+    setQuery,
+  } = props
+
+  const onSubmit = (event) => {
+    event.preventDefault()
+    handleQuery()
+  }
 
   return (
     <form
       className="search__form"
-      onSubmit={(event) => event.preventDefault()}
+      onSubmit={onSubmit}
     >
       <Field
         id = "movieName"
+        value = {query}
+        onInput = {(event) => setQuery(event.target.value)}
       >
         Movie Name:
       </Field>
