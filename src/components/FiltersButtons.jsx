@@ -5,11 +5,12 @@ const FiltersButtons = (props) => {
     loadMoreClass,
     switchClass,
     type,
+    hasMovies,
     loadMore,
     switchList,
   } = props
 
-  return (
+  return hasMovies ? (
     <div className="filters">
       <Button
         className ={loadMoreClass}
@@ -27,6 +28,7 @@ const FiltersButtons = (props) => {
       </Button>
     </div>
   )
+    : null
 }
 
 export default FiltersButtons
