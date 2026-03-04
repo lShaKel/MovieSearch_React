@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Button from "./Button.jsx";
 
 const FiltersButtons = (props) => {
@@ -31,4 +32,4 @@ const FiltersButtons = (props) => {
     : null
 }
 
-export default FiltersButtons
+export default memo(FiltersButtons)

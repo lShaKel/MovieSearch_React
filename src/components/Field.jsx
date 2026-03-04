@@ -1,3 +1,4 @@
+import {memo} from "react";
 const Field =  (props) => {
   const  {
     id,
@@ -26,5 +27,5 @@ const Field =  (props) => {
   )
 }
 
-export default Field
+export default memo(Field)
 

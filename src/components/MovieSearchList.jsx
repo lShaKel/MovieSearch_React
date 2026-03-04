@@ -1,16 +1,20 @@
+import {memo, useMemo} from "react";
 import MovieSearchItem from "./MovieSearchItem.jsx";
 
 const MovieSearchList = (props) => {
-
   const {
     movies = [],
     filter,
     className,
   } = props
 
-  const listToRender = filter === 'popular'
-  ? [...movies].sort((a,b) => b.popularity - a.popularity)
-    : movies
+  const listToRender = useMemo(() => {
+    if (filter === 'popular') {
+      return [...movies].sort((a, b) => b.popularity - a.popularity)
+    }
+
+    return movies
+  }, [movies, filter])
 
   if(listToRender.length === 0 ) {
     return (
@@ -32,4 +36,4 @@ const MovieSearchList = (props) => {
   )
 }
 
-export default MovieSearchList
+export default memo(MovieSearchList)

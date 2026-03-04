@@ -1,4 +1,4 @@
-import {useState, useEffect, useRef} from "react";
+import {useState, useEffect, useRef, useCallback} from "react";
 import Button from "./Button.jsx";
 import Loader from "./Loader.jsx";
 import MovieSearchList from "./MovieSearchList.jsx";
@@ -18,7 +18,7 @@ const MovieSearch = () => {
   const hasMovies = totalMovies > 0
 
   const [page, setPage] = useState(null)
-  const [mode, setMode] = useState('') // 'discover' | 'query'
+  const [mode, setMode] = useState('')
   const [query, setQuery] = useState('')
   const [filter, setFilter] = useState('all')
 
@@ -29,16 +29,6 @@ const MovieSearch = () => {
 
   const lastQueryRef = useRef('')
 
-  useEffect(() => {
-    searcMovies(page, query, mode).catch(err => console.log(err))
-  }, [mode])
-
-  useEffect(() => {
-    document.body.classList.toggle('white', !isDarkMode)
-
-    saveThemeToLocalStorage(isDarkMode)
-  }, [isDarkMode])
-
   const saveThemeToLocalStorage = (isDarkMode) => {
     localStorage.setItem(THEME_KEY, JSON.stringify(isDarkMode))
   }
@@ -47,33 +37,23 @@ const MovieSearch = () => {
     setIsDarkMode(!isDarkMode)
   }
 
-  const loadMore = async () => {
-    if(!page) return
-
-    const nextPage = page + 1
-    setPage(nextPage)
-
-    const queryToUse = lastQueryRef.current
-
-    searcMovies(nextPage, queryToUse, mode).catch(console.error)
-  }
-
-  const searcMovies = async (pageToUse, queryToUse, modeToUse) => {
+  const searcMovies = useCallback(async (pageToUse, queryToUse, modeToUse) => {
     try {
-      let movies = []
+      let searchMovies = []
+
       if (modeToUse === 'discover') {
-        movies = await fetchMovies({year: 2025, page: pageToUse}, 'discover/movie')
+        searchMovies = await fetchMovies({year: 2025, page: pageToUse}, 'discover/movie')
       }
 
       if (modeToUse === 'query') {
         if (!queryToUse.trim()) return
 
         lastQueryRef.current = queryToUse
-        movies = await fetchMovies({query: queryToUse,page: pageToUse}, 'search/movie')
+        searchMovies = await fetchMovies({query: queryToUse,page: pageToUse}, 'search/movie')
       }
 
       setMovies(prev => {
-        const uniqueMovies = movies.filter(
+        const uniqueMovies = searchMovies.filter(
           movie => !prev.some(prevMovie => prevMovie.id === movie.id)
         )
         return [...prev, ...uniqueMovies]
@@ -84,7 +64,19 @@ const MovieSearch = () => {
     }
 
     setQuery('')
-  }
+  }, [])
+
+  const loadMore = useCallback(async () => {
+    if(!page) return
+
+    const nextPage = page + 1
+    setPage(nextPage)
+
+    const queryToUse = lastQueryRef.current
+
+    searcMovies(nextPage, queryToUse, mode).catch(console.error)
+  }, [page, mode, searcMovies])
+
 
   const fetchMovies = async (params, endpoint) => {
     const queryParams = new URLSearchParams({
@@ -108,14 +100,28 @@ const MovieSearch = () => {
     return data.results
   }
 
+
+  useEffect(() => {
+    searcMovies(page, query, mode).catch(err => console.log(err))
+  }, [mode, page, searcMovies])
+
+  useEffect(() => {
+    document.body.classList.toggle('white', !isDarkMode)
+
+    saveThemeToLocalStorage(isDarkMode)
+  }, [isDarkMode])
+
+
   const handleDiscover = () => {
     setMode('discover')
     setPage(1)
+    setMovies([])
   }
 
   const handleQuery = () => {
     setMode('query')
     setPage(1)
+    setMovies([])
   }
 
   const handleFilter = () => {
@@ -129,7 +135,6 @@ const MovieSearch = () => {
       setFilter('default')
     }
   }
-
   return (
     <div className={`search ${isDarkMode ? '' : 'white'}`}>
       <MovieSearchQForm
