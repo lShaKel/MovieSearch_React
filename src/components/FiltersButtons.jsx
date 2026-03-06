@@ -1,4 +1,5 @@
-import { memo } from "react";
+import { memo, useContext } from "react";
+import {MoviesContext} from "../context/MoviesContext.jsx"
 import Button from "./Button.jsx";
 
 const FiltersButtons = (props) => {
@@ -6,10 +7,13 @@ const FiltersButtons = (props) => {
     loadMoreClass,
     switchClass,
     type,
+  } = props
+
+  const {
     hasMovies,
     loadMore,
-    switchList,
-  } = props
+    handleFilter,
+  } = useContext(MoviesContext)
 
   return hasMovies ? (
     <div className="filters">
@@ -23,7 +27,7 @@ const FiltersButtons = (props) => {
       <Button
         className ={switchClass}
         type = {type}
-        onClick = {switchList}
+        onClick = {handleFilter}
       >
         Popular / Top rated
       </Button>

@@ -1,12 +1,14 @@
+import {useContext} from "react";
+import {MoviesContext} from "../context/MoviesContext.jsx";
 import Field from "./Field.jsx";
 import Button from "./Button.jsx";
 
-const MovieSearchQForm = (props) => {
+const MovieSearchQForm = () => {
   const {
     query,
     handleQuery,
     setQuery,
-  } = props
+  } = useContext(MoviesContext)
 
   const onSubmit = (event) => {
     event.preventDefault()

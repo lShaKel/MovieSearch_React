@@ -1,12 +1,15 @@
-import {memo, useMemo} from "react";
+import {memo, useMemo, useContext} from "react";
+import { MoviesContext } from "../context/MoviesContext.jsx";
 import MovieSearchItem from "./MovieSearchItem.jsx";
 
 const MovieSearchList = (props) => {
   const {
-    movies = [],
-    filter,
     className,
   } = props
+  const {
+    movies = [],
+    filter,
+  } = useContext(MoviesContext)
 
   const listToRender = useMemo(() => {
     if (filter === 'popular') {

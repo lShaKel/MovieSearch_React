@@ -1,9 +1,12 @@
 import MovieSearch from "./components/MovieSearch.jsx";
+import {MoviesProvider} from "./context/MoviesContext.jsx";
 
 const App = () => {
 
   return (
-    <MovieSearch/>
+    <MoviesProvider>
+      <MovieSearch/>
+    </MoviesProvider>
   )
 }
 
