@@ -1,16 +1,16 @@
 import {useCallback, useEffect, useRef, useState} from "react";
 import useMoviesLocalStorage from "./useMoviesLocalStorage.js";
 
-const useMoviesTasks = () => {
+const useMovies = () => {
 
   const THEME_KEY = 'isDarkTheme'
   const { saveThemeToLocalStorage, loadFromLocalStorage } = useMoviesLocalStorage(THEME_KEY)
 
   const [movies, setMovies] = useState([
-      {id: 1, title: 'Oregairu', src: '/Oregairu.jpg'},
-      {id: 2, title: 'Oregairu', src: '/Oregairu.jpg'},
-    ]
-  )
+      {id: 11, title: 'Oregairu', src: '/Oregairu.jpg'},
+      {id: 12, title: 'Oregairu', src: '/Oregairu.jpg'},
+    ])
+
   const totalMovies = movies.length
   const hasMovies = totalMovies > 0
 
@@ -25,9 +25,9 @@ const useMoviesTasks = () => {
 
   const themeChange = useCallback( () => {
     setIsDarkMode(prev => !prev)
-  })
+  }, [])
 
-  const searcMovies = useCallback(async (pageToUse, queryToUse, modeToUse) => {
+  const searchMovies = useCallback(async (pageToUse, queryToUse, modeToUse) => {
     try {
       let searchMovies = []
 
@@ -40,6 +40,7 @@ const useMoviesTasks = () => {
 
         lastQueryRef.current = queryToUse
         searchMovies = await fetchMovies({query: queryToUse,page: pageToUse}, 'search/movie')
+        setQuery('')
       }
 
       setMovies(prev => {
@@ -52,22 +53,18 @@ const useMoviesTasks = () => {
     } catch (err) {
       setMovies([])
     }
-
-    setQuery('')
   }, [])
 
   const loadMore = useCallback(async () => {
     if(!page) return
-
-    setPage(prev => prev + 1)
 
     const nextPage = page + 1
     setPage(nextPage)
 
     const queryToUse = lastQueryRef.current
 
-    searcMovies(nextPage, queryToUse, mode).catch(console.error)
-  }, [page, mode, searcMovies])
+    searchMovies(nextPage, queryToUse, mode).catch(console.error)
+  }, [page, mode, searchMovies])
 
 
   const fetchMovies = async (params, endpoint) => {
@@ -92,10 +89,19 @@ const useMoviesTasks = () => {
     return data.results
   }
 
+  const getMovieById = (id) => {
+    const neededMovie = movies.find((movie) => {
+      return movie.id === id
+    })
+
+    if(!neededMovie) throw new Error('Not found')
+
+    return neededMovie
+  }
 
   useEffect(() => {
-    searcMovies(page, query, mode).catch(err => console.log(err))
-  }, [mode, page, searcMovies])
+    searchMovies(page, query, mode).catch(err => console.log(err))
+  }, [mode, page, searchMovies])
 
   useEffect(() => {
     document.body.classList.toggle('white', !isDarkMode)
@@ -140,7 +146,8 @@ const useMoviesTasks = () => {
     loadMore,
     handleFilter,
     themeChange,
+    getMovieById
   }
 }
 
-export default useMoviesTasks
+export default useMovies

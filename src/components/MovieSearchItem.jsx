@@ -1,5 +1,8 @@
+import RouterLink from "./RouterLink.jsx";
+
 const movieSearchItem = (props) => {
   const {
+    id,
     title,
     poster_path,
     src
@@ -11,7 +14,9 @@ const movieSearchItem = (props) => {
 
   return (
     <li className="search__results">
-      <p>{title}</p>
+      <RouterLink to={`/movies/${id}`}>
+        {title}
+      </RouterLink>
       <img
         src={path}
         alt= 'Movies you waited for'

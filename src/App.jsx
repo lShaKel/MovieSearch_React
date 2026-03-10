@@ -1,11 +1,18 @@
-import MovieSearch from "./components/MovieSearch.jsx";
+import Router from "./Router.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import MoviesPage from "./pages/MoviesPage.jsx";
 import {MoviesProvider} from "./context/MoviesContext.jsx";
 
 const App = () => {
+  const routes = {
+    '/':HomePage,
+    '/movies/:id': MoviesPage,
+    '*': () => <div className="search__empty-message">404 Not Found</div>
+  }
 
   return (
     <MoviesProvider>
-      <MovieSearch/>
+      <Router routes={routes} />
     </MoviesProvider>
   )
 }

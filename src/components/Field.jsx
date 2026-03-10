@@ -20,7 +20,7 @@ const Field =  (props) => {
         id={id}
         placeholder=" "
         autoComplete="off"
-        value = {value}
+        value = {value || ''}
         onInput={onInput}
       />
     </div>

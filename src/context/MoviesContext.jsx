@@ -1,5 +1,5 @@
-import {createContext, useCallback, useEffect, useRef, useState, useMemo} from "react";
-import useMoviesTasks from "../hooks/useMoviesTasks.js";
+import {createContext} from "react";
+import useMovies from "../hooks/useMovies.js";
 
 export const MoviesContext = createContext({})
 
@@ -18,7 +18,8 @@ export const MoviesProvider = (props) => {
     loadMore,
     handleFilter,
     themeChange,
-  } = useMoviesTasks()
+    getMovieById,
+  } = useMovies()
 
   return (
     <MoviesContext.Provider
@@ -34,6 +35,7 @@ export const MoviesProvider = (props) => {
         loadMore,
         handleFilter,
         themeChange,
+        getMovieById,
       }}
     >
       {children}
