@@ -1,0 +1,40 @@
+
+.loader{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+
+  color: yellow;
+
+  .text {
+    display: inline-block;
+    -webkit-box-reflect: below 0 linear-gradient(transparent, rgba(255,255,255,0.2));
+  }
+}
+
+.span {
+  display: inline-block;
+  font-size: 5vw;
+  animation: wave 1.5s infinite;
+  animation-delay: calc((var(--i) - 1) * 0.15s);
+  will-change: transform;
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}

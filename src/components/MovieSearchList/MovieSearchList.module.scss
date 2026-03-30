@@ -1,0 +1,15 @@
+.searchList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 45px;
+  flex-direction: column;
+}
+
+.searchEmptyMessage{
+  color: red;
+  text-align: center;
+  padding-block: 100px;
+  font-size: 50px;
+  font-weight: 700;
+
+}
