@@ -1,4 +1,5 @@
-import RouterLink from "./RouterLink.jsx";
+import RouterLink from "../RouterLink.jsx";
+import styles from './MovieSearchItem.module.scss'
 
 const movieSearchItem = (props) => {
   const {
@@ -13,7 +14,7 @@ const movieSearchItem = (props) => {
     : src
 
   return (
-    <li className="search__results">
+    <li className={styles.search__results}>
       <RouterLink to={`/movies/${id}`}>
         {title}
       </RouterLink>

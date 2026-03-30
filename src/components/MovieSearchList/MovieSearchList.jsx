@@ -1,11 +1,9 @@
 import {memo, useMemo, useContext} from "react";
-import { MoviesContext } from "../context/MoviesContext.jsx";
-import MovieSearchItem from "./MovieSearchItem.jsx";
+import { MoviesContext } from "../../context/MoviesContext.jsx";
+import MovieSearchItem from "../MovieSearchItem/MovieSearchItem.jsx";
+import styles from './MovieSearchList.module.scss'
 
-const MovieSearchList = (props) => {
-  const {
-    className,
-  } = props
+const MovieSearchList = () => {
   const {
     movies = [],
     filter,
@@ -21,13 +19,13 @@ const MovieSearchList = (props) => {
 
   if(listToRender.length === 0 ) {
     return (
-      <div className="search__empty-message">Nothing there</div>
+      <div className={styles.searchEmptyMessage}>Nothing there</div>
     )
   }
 
   return (
     <ul
-      className={className}
+      className={styles.searchList}
     >
       {listToRender.map((movie) => (
         <MovieSearchItem

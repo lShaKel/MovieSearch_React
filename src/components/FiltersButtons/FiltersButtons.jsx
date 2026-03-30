@@ -1,13 +1,9 @@
 import { memo, useContext } from "react";
-import {MoviesContext} from "../context/MoviesContext.jsx"
-import Button from "./Button.jsx";
+import {MoviesContext} from "../../context/MoviesContext.jsx"
+import Button from "../Button/Button.jsx";
+import styles from './FilterButtons.module.scss'
 
-const FiltersButtons = (props) => {
-  const {
-    loadMoreClass,
-    switchClass,
-    type,
-  } = props
+const FiltersButtons = () => {
 
   const {
     hasMovies,
@@ -16,17 +12,15 @@ const FiltersButtons = (props) => {
   } = useContext(MoviesContext)
 
   return hasMovies ? (
-    <div className="filters">
+    <div className={styles.filters}>
       <Button
-        className ={loadMoreClass}
-        type ={type}
+        className ={styles.loadButton}
         onClick = {loadMore}
       >
         Load more
       </Button>
       <Button
-        className ={switchClass}
-        type = {type}
+        className ={styles.switchButton}
         onClick = {handleFilter}
       >
         Popular / Top rated

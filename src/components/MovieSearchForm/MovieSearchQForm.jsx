@@ -1,7 +1,8 @@
 import {useContext} from "react";
-import {MoviesContext} from "../context/MoviesContext.jsx";
-import Field from "./Field.jsx";
-import Button from "./Button.jsx";
+import {MoviesContext} from "../../context/MoviesContext.jsx";
+import Field from "../Field.jsx";
+import Button from "../Button/Button.jsx";
+import styles from './MovieSearchQForm.module.scss'
 
 const MovieSearchQForm = () => {
   const {
@@ -17,7 +18,7 @@ const MovieSearchQForm = () => {
 
   return (
     <form
-      className="search__form"
+      className={styles.searchForm}
       onSubmit={onSubmit}
     >
       <Field

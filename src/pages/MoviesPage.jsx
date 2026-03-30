@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from "react";
-import Loader from "../components/Loader.jsx";
+import Loader from "../components/Loader/Loader.jsx";
 import {MoviesContext} from "../context/MoviesContext.jsx";
 
 const MoviesPage = (props) => {
@@ -22,16 +22,14 @@ const MoviesPage = (props) => {
         console.log(error)
         setHasError(true)
       } finally {
-        setIsLoading(false)
+        setTimeout(() => {        setIsLoading(false)}, 500)
       }
 
   }, [movieId, getMovieById])
 
   if(isLoading) {
     return (
-      <Loader
-        className="loader"
-      />
+      <Loader/>
     )
   }
 

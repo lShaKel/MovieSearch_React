@@ -1,9 +1,8 @@
 import { useContext } from "react";
-import Button from "./Button.jsx";
-import Loader from "./Loader.jsx";
-import MovieSearchList from "./MovieSearchList.jsx";
-import FiltersButtons from "./FiltersButtons.jsx";
-import MovieSearchQForm from "./MovieSearchQForm.jsx";
+import Button from "./Button/Button.jsx";
+import MovieSearchList from "./MovieSearchList/MovieSearchList.jsx";
+import FiltersButtons from "./FiltersButtons/FiltersButtons.jsx";
+import MovieSearchQForm from "./MovieSearchForm/MovieSearchQForm.jsx";
 import { MoviesContext } from "../context/MoviesContext.jsx";
 
 const MovieSearch = () => {
@@ -13,34 +12,31 @@ const MovieSearch = () => {
     themeChange,
   } = useContext(MoviesContext)
 
+  const DiscoverButton = () => {
+    return <Button
+      variant='discover'
+      onClick={handleDiscover}
+    >
+      Search discover
+    </Button>
+  }
+
+  const ThemeButton = () => {
+    return <Button
+      variant='theme'
+      onClick={themeChange}
+    >
+      Change theme
+    </Button>
+  }
+
   return (
-      <div className={`search ${isDarkMode ? '' : 'white'}`}>
+      <div className={`SearchMovies ${isDarkMode ? '' : 'white'}`}>
         <MovieSearchQForm />
-        <Button
-          className="search__form-button discover-button"
-          type="submit"
-          onClick={handleDiscover}
-        >
-          Search discover
-        </Button>
-        <FiltersButtons
-          loadMoreClass="search__form-button load-more"
-          switchClass="search__form-button switch-button"
-          type="button"
-        />
-        <MovieSearchList
-          className="search__list"
-        />
-        <Button
-          className="theme-changer"
-          type="button"
-          onClick = {themeChange}
-        >
-          Change theme
-        </Button>
-        <Loader
-          className="loader visually-hidden"
-        />
+        <DiscoverButton />
+        <FiltersButtons />
+        <MovieSearchList />
+        <ThemeButton />
       </div>
   )
 }
