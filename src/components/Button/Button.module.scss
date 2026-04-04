@@ -21,3 +21,24 @@
 .discoverButton{
   width: 100%;
 }
+
+.burgerButton{
+  position: relative;
+  all:unset;
+
+
+  width: 80px;
+  height: 65px;
+
+  svg{
+    color: var(--yellow-55);
+  }
+
+  &:hover svg{
+    color: var(--yellow-80);
+  }
+
+  &:active {
+    scale: 1.1;
+  }
+}

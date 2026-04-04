@@ -2,6 +2,7 @@ import Router from "./Router.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import MoviesPage from "./pages/MoviesPage.jsx";
 import {MoviesProvider} from "./context/MoviesContext.jsx";
+import './styles'
 
 const App = () => {
   const routes = {
