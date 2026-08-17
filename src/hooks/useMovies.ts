@@ -1,12 +1,29 @@
 import {useCallback, useEffect, useRef, useState} from "react";
-import useMoviesLocalStorage from "./useMoviesLocalStorage.js";
+import useMoviesLocalStorage from "./useMoviesLocalStorage";
+
+interface Movie{
+  id: number,
+  title: string,
+  src:string,
+}
+
+interface TMDBResponse<T> {
+  page: number;
+  results: T[];
+  total_pages: number;
+  total_results: number;
+}
+
+type MoviesModes = 'discover' | 'query' | 'default'
+type MoviesFilters = 'all' | 'popular' | 'default'
+type MoviesEndPoint = 'discover/movie' | 'search/movie'
 
 const useMovies = () => {
 
   const THEME_KEY = 'isDarkTheme'
   const { saveThemeToLocalStorage, loadFromLocalStorage } = useMoviesLocalStorage(THEME_KEY)
 
-  const [movies, setMovies] = useState([
+  const [movies, setMovies] = useState<Movie[]>([
       {id: 11, title: 'Oregairu', src: '/Oregairu.jpg'},
       {id: 12, title: 'Oregairu', src: '/Oregairu.jpg'},
     ])
@@ -14,12 +31,12 @@ const useMovies = () => {
   const totalMovies = movies.length
   const hasMovies = totalMovies > 0
 
-  const [page, setPage] = useState(null)
-  const [mode, setMode] = useState('')
-  const [query, setQuery] = useState('')
-  const [filter, setFilter] = useState('all')
+  const [page, setPage] = useState<number | null>(null)
+  const [mode, setMode] = useState<MoviesModes>('default')
+  const [query, setQuery] = useState<string>('')
+  const [filter, setFilter] = useState<MoviesFilters>('all')
 
-  const [isDarkMode, setIsDarkMode] = useState(() => loadFromLocalStorage())
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(() => loadFromLocalStorage())
 
   const lastQueryRef = useRef('')
 
@@ -27,9 +44,9 @@ const useMovies = () => {
     setIsDarkMode(prev => !prev)
   }, [])
 
-  const searchMovies = useCallback(async (pageToUse, queryToUse, modeToUse) => {
+  const searchMovies = useCallback(async (pageToUse:number, queryToUse:string, modeToUse:MoviesModes) => {
     try {
-      let searchMovies = []
+      let searchMovies:Movie[] = []
 
       if (modeToUse === 'discover') {
         searchMovies = await fetchMovies({year: 2025, page: pageToUse}, 'discover/movie')
@@ -39,17 +56,16 @@ const useMovies = () => {
         if (!queryToUse.trim()) return
 
         lastQueryRef.current = queryToUse
-        searchMovies = await fetchMovies({query: queryToUse,page: pageToUse}, 'search/movie')
+        searchMovies = await fetchMovies({query:queryToUse,page: pageToUse}, 'search/movie')
         setQuery('')
       }
 
       setMovies(prev => {
-        const uniqueMovies = searchMovies.filter(
+        const uniqueMovies:Movie[] = searchMovies.filter(
           movie => !prev.some(prevMovie => prevMovie.id === movie.id)
         )
         return [...prev, ...uniqueMovies]
       })
-
     } catch (err) {
       setMovies([])
     }
@@ -63,11 +79,11 @@ const useMovies = () => {
 
     const queryToUse = lastQueryRef.current
 
-    searchMovies(nextPage, queryToUse, mode).catch(console.error)
+    searchMovies(nextPage, queryToUse, mode).catch(error => error)
   }, [page, mode, searchMovies])
 
 
-  const fetchMovies = async (params, endpoint) => {
+  const fetchMovies = async (params: Record<string, string | number>, endpoint:MoviesEndPoint) => {
     const queryParams = new URLSearchParams({
       api_key: 'b1229af585e82db703e1a1cd074ea253',
       ...params
@@ -80,16 +96,17 @@ const useMovies = () => {
       throw new Error('Something went wrong')
     }
 
-    const data = await response.json()
+    const data:TMDBResponse<Movie> = await response.json()
 
     if (data.results.length === 0) {
       throw new Error('Nothing was found')
     }
 
+
     return data.results
   }
 
-  const getMovieById = (id) => {
+  const getMovieById = (id:number) => {
     const neededMovie = movies.find((movie) => {
       return movie.id === id
     })
@@ -100,7 +117,9 @@ const useMovies = () => {
   }
 
   useEffect(() => {
-    searchMovies(page, query, mode).catch(err => console.log(err))
+    if(page === null) return
+
+    searchMovies(page, query, mode).catch(err => err)
   }, [mode, page, searchMovies])
 
   useEffect(() => {
@@ -123,7 +142,7 @@ const useMovies = () => {
   }
 
   const handleFilter = () => {
-    if (!movies) return
+    if (!hasMovies) return
 
     if (filter !== 'popular') {
       setFilter('popular')
