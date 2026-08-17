@@ -31,9 +31,9 @@ const Button = (props) => {
           viewBox="0 0 24 24"
           fill="none"
           stroke="#ffd11a"
-          stroke-width="3"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
           className="lucide lucide-menu-icon lucide-menu"
         >
           <path d="M4 5h16" />

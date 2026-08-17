@@ -4,7 +4,7 @@ import MovieSearchList from "./MovieSearchList/MovieSearchList.jsx";
 import FiltersButtons from "./FiltersButtons/FiltersButtons.jsx";
 import MovieSearchQForm from "./MovieSearchForm/MovieSearchQForm.jsx";
 import Header from "./Header/Header.jsx"
-import { MoviesContext } from "../context/MoviesContext.jsx";
+import { MoviesContext } from "../context/MoviesContext.tsx";
 
 const MovieSearch = () => {
   const {

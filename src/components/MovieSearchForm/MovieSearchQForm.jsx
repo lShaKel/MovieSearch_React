@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {MoviesContext} from "../../context/MoviesContext.jsx";
+import {MoviesContext} from "../../context/MoviesContext.tsx";
 import Field from "../Field.jsx";
 import Button from "../Button/Button.jsx";
 import styles from './MovieSearchQForm.module.scss'

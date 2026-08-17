@@ -1,4 +1,4 @@
-import MovieSearch from "../components/MovieSearch.jsx";
+import MovieSearch from "../../components/MovieSearch.jsx";
 
 const HomePage = () => {
 

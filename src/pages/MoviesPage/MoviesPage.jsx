@@ -1,6 +1,7 @@
 import {useContext, useEffect, useState} from "react";
-import Loader from "../components/Loader/Loader.jsx";
-import {MoviesContext} from "../context/MoviesContext.jsx";
+import Loader from "../../components/Loader/Loader.jsx";
+import {MoviesContext} from "../../context/MoviesContext.tsx";
+import styles from './MoviesPage.module.scss'
 
 const MoviesPage = (props) => {
   const { params } = props
@@ -40,7 +41,10 @@ const MoviesPage = (props) => {
   const {
     src = null,
     poster_path = null,
+    backdrop_path = null,
     title,
+    overview = '',
+    vote_average = '',
   } = movie
 
   const path = poster_path
@@ -48,14 +52,16 @@ const MoviesPage = (props) => {
     : src ?? 'unlucky.jpg'
 
   return(
-    <div className="Movie_page">
+    <div className={styles.Movie_page}>
       <h1>{title}</h1>
+      <p>Average rating:{vote_average}</p>
       <img
         src={path}
-        alt= 'Movies you waited for'
+        alt= 'Poster of the film'
         width="320px"
         height="400px"
       />
+      <p>{overview}</p>
     </div>
   )
 }

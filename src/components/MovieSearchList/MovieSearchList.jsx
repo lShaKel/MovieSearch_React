@@ -1,5 +1,5 @@
 import {memo, useMemo, useContext} from "react";
-import { MoviesContext } from "../../context/MoviesContext.jsx";
+import { MoviesContext } from "../../context/MoviesContext.tsx";
 import MovieSearchItem from "../MovieSearchItem/MovieSearchItem.jsx";
 import styles from './MovieSearchList.module.scss'
 

@@ -1,7 +1,7 @@
 import Router from "./Router.jsx";
-import HomePage from "./pages/HomePage.jsx";
-import MoviesPage from "./pages/MoviesPage.jsx";
-import {MoviesProvider} from "./context/MoviesContext.jsx";
+import HomePage from "./pages/HomePage/HomePage.jsx";
+import MoviesPage from "./pages/MoviesPage/MoviesPage.jsx";
+import {MoviesProvider} from "./context/MoviesContext.tsx";
 import './styles'
 
 const App = () => {
