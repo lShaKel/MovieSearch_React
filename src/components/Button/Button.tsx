@@ -1,15 +1,25 @@
+import type {PropsWithChildren, MouseEvent} from "react";
 import styles from './Button.module.scss'
-const Button = (props) => {
+
+type ButtonVariant = 'discover' | 'theme' | 'burger'
+type ButtonProps = {
+  className: string,
+  type:'button' | 'submit',
+  variant:ButtonVariant,
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void,
+}
+
+const Button = (props:PropsWithChildren<ButtonProps>) => {
 
   const {
-    className = "",
-    type = 'button',
-    variant = '',
+    className,
+    type,
+    variant,
     children,
     onClick,
   } = props
 
-  const variants = {
+  const variants:Record<ButtonVariant, string | undefined> = {
     discover: styles.discoverButton,
     theme: 'theme-changer',
     burger: styles.burgerButton
