@@ -1,22 +1,6 @@
 import {useCallback, useEffect, useRef, useState} from "react";
 import useMoviesLocalStorage from "./useMoviesLocalStorage";
-
-interface Movie{
-  id: number,
-  title: string,
-  src:string,
-}
-
-interface TMDBResponse<T> {
-  page: number;
-  results: T[];
-  total_pages: number;
-  total_results: number;
-}
-
-type MoviesModes = 'discover' | 'query' | 'default'
-type MoviesFilters = 'all' | 'popular' | 'default'
-type MoviesEndPoint = 'discover/movie' | 'search/movie'
+import type {Movie,TMDBResponse, MoviesModes, MoviesFilters, MoviesEndPoint} from "../util/movies.types"
 
 const useMovies = () => {
 

@@ -1,9 +1,13 @@
-import {createContext} from "react";
-import useMovies from "../hooks/useMovies.js";
+import {createContext, type ReactNode} from "react";
+import useMovies from "../hooks/useMovies";
 
-export const MoviesContext = createContext({})
+type MoviesContextValue = ReturnType<typeof useMovies>
+export const MoviesContext = createContext<MoviesContextValue | undefined>(undefined)
 
-export const MoviesProvider = (props) => {
+interface MoviesProviderProps {
+  children: ReactNode
+}
+export const MoviesProvider = (props:MoviesProviderProps) => {
   const { children } = props
 
   const {
