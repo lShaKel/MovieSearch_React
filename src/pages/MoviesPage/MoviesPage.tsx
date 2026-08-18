@@ -1,17 +1,28 @@
 import {useContext, useEffect, useState} from "react";
-import Loader from "../../components/Loader/Loader.jsx";
-import {MoviesContext} from "../../context/MoviesContext.tsx";
+import Loader from "../../components/Loader/Loader";
+import {MoviesContext} from "../../context/MoviesContext";
 import styles from './MoviesPage.module.scss'
+import type {Movie} from "../../util/movies.types";
 
-const MoviesPage = (props) => {
+type MoviePageProps = {
+  params: {
+    id: string
+  }
+}
+
+const MoviesPage = (props:MoviePageProps) => {
+
+  const context = useContext(MoviesContext)
+  if(context === undefined) {throw new Error('Invalid Context')}
+
   const { params } = props
   const movieId = Number(params.id)
 
-  const { getMovieById } = useContext(MoviesContext)
+  const { getMovieById } = context
 
-  const [movie, setMovie] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [hasError, setHasError] = useState(false)
+  const [movie, setMovie] = useState<Movie | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [hasError, setHasError] = useState<boolean>(false)
 
   useEffect(() => {
       try {
@@ -20,7 +31,6 @@ const MoviesPage = (props) => {
         setMovie(movieData)
         setHasError(false)
       } catch (error) {
-        console.log(error)
         setHasError(true)
       } finally {
         setTimeout(() => {        setIsLoading(false)}, 500)
@@ -37,14 +47,14 @@ const MoviesPage = (props) => {
   if(hasError) {
     return <div>Movie not found</div>
   }
-
+  if(movie === null) {return <div>Something went wrong</div>}
   const {
-    src = null,
-    poster_path = null,
-    backdrop_path = null,
+    src,
+    poster_path,
+    backdrop_path,
     title,
-    overview = '',
-    vote_average = '',
+    overview,
+    vote_average,
   } = movie
 
   const path = poster_path

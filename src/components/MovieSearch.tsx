@@ -1,17 +1,21 @@
 import { useContext } from "react";
-import Button from "./Button/Button.jsx";
-import MovieSearchList from "./MovieSearchList/MovieSearchList.jsx";
-import FiltersButtons from "./FiltersButtons/FiltersButtons.jsx";
-import MovieSearchQForm from "./MovieSearchForm/MovieSearchQForm.jsx";
-import Header from "./Header/Header.jsx"
-import { MoviesContext } from "../context/MoviesContext.tsx";
+import Button from "./Button/Button";
+import MovieSearchList from "./MovieSearchList/MovieSearchList";
+import FiltersButtons from "./FiltersButtons/FiltersButtons";
+import MovieSearchQForm from "./MovieSearchForm/MovieSearchQForm";
+import Header from "./Header/Header"
+import { MoviesContext } from "../context/MoviesContext";
 
 const MovieSearch = () => {
+
+  const context = useContext(MoviesContext)
+  if(context === undefined) {throw new Error('Context invalid')}
+
   const {
     isDarkMode,
     handleDiscover,
     themeChange,
-  } = useContext(MoviesContext)
+  } = context
 
   const DiscoverButton = () => {
     return <Button

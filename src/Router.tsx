@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 
 export const useRoute = () => {
-  const [path, setPath] = useState(() => window.location.pathname)
+  const [path, setPath] = useState<string>(() => window.location.pathname)
 
   useEffect(() => {
     const onLocationChange = () => {
@@ -17,6 +17,8 @@ export const useRoute = () => {
 
   return path
 }
+
+
 
 const Router = (props) => {
   const { routes } = props

@@ -1,7 +1,14 @@
-import RouterLink from "../RouterLink.jsx";
+import RouterLink from "../RouterLink.js";
 import styles from './MovieSearchItem.module.scss'
 
-const movieSearchItem = (props) => {
+type ItemProps = {
+  id:number,
+  title:string,
+  poster_path?: string,
+  src?: string,
+}
+
+const MovieSearchItem = (props:ItemProps) => {
   const {
     id,
     title,
@@ -18,14 +25,12 @@ const movieSearchItem = (props) => {
       <RouterLink to={`/movies/${id}`}>
         {title}
       </RouterLink>
-      <img
+      <img className={styles.img}
         src={path}
-        alt= 'Movies you waited for'
-        width="320px"
-        height="400px"
+        alt={title}
       />
     </li>
   )
 }
 
-export default movieSearchItem
+export default MovieSearchItem

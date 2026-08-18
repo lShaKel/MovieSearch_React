@@ -1,17 +1,20 @@
-import {useContext} from "react";
-import {MoviesContext} from "../../context/MoviesContext.tsx";
-import Field from "../Field.jsx";
-import Button from "../Button/Button.jsx";
+import {type ChangeEvent, type SyntheticEvent, useContext} from "react";
+import {MoviesContext} from "../../context/MoviesContext";
+import Field from "../Field.js";
+import Button from "../Button/Button";
 import styles from './MovieSearchQForm.module.scss'
 
 const MovieSearchQForm = () => {
+
+  const context = useContext(MoviesContext)
+  if(!context) { throw new Error ('Missing Context')}
   const {
     query,
     handleQuery,
     setQuery,
-  } = useContext(MoviesContext)
+  } = context
 
-  const onSubmit = (event) => {
+  const onSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault()
     handleQuery()
   }
@@ -24,7 +27,7 @@ const MovieSearchQForm = () => {
       <Field
         id = "movieName"
         value = {query}
-        onInput = {(event) => setQuery(event.target.value)}
+        onInput = {(event: ChangeEvent<HTMLInputElement>) => setQuery(event.target.value)}
       >
         Movie Name:
       </Field>

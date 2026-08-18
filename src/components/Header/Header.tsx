@@ -1,4 +1,4 @@
-import Button from "../Button/Button.jsx";
+import Button from "../Button/Button";
 import styles from './Header.module.scss'
 
 const Header = () => {

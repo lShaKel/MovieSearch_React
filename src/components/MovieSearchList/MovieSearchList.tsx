@@ -1,13 +1,17 @@
 import {memo, useMemo, useContext} from "react";
-import { MoviesContext } from "../../context/MoviesContext.tsx";
-import MovieSearchItem from "../MovieSearchItem/MovieSearchItem.jsx";
+import { MoviesContext } from "../../context/MoviesContext";
+import MovieSearchItem from "../MovieSearchItem/MovieSearchItem";
 import styles from './MovieSearchList.module.scss'
 
 const MovieSearchList = () => {
+
+  const context = useContext(MoviesContext)
+  if(context === undefined) {throw new Error('Context is wrong')}
+
   const {
     movies = [],
     filter,
-  } = useContext(MoviesContext)
+  } = context
 
   const listToRender = useMemo(() => {
     if (filter === 'popular') {

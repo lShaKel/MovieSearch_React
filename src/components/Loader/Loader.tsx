@@ -1,4 +1,9 @@
+import type {CSSProperties} from "react";
 import styles from './Loader.module.scss'
+
+interface CSSProp extends CSSProperties{
+  '--i'?: string | number
+}
 
 const Loader = () => {
 
@@ -10,7 +15,7 @@ const Loader = () => {
     >
       <div className={styles.text}>
         {text.split('').map((char,i) => (
-          <span className={styles.span} key={i} style={{"--i": i + 1}}>
+          <span className={styles.span} key={i} style={{"--i": i + 1} as CSSProp}>
             {char}
           </span>
         ))}

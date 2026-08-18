@@ -1,5 +1,12 @@
-import {memo} from "react";
-const Field =  (props) => {
+import {type ChangeEvent, memo, type PropsWithChildren} from "react";
+
+type FieldProps = {
+  id: string,
+  value: string,
+  onInput:(event:ChangeEvent<HTMLInputElement>) => void,
+}
+
+const Field =  (props:PropsWithChildren<FieldProps>) => {
   const  {
     id,
     value,
@@ -10,7 +17,7 @@ const Field =  (props) => {
   return (
     <div className="Field">
       <label
-        htmlFor={"movieName"}
+        htmlFor={id}
         className="search__form-label"
       >
         {children}
@@ -21,7 +28,7 @@ const Field =  (props) => {
         placeholder=" "
         autoComplete="off"
         value = {value || ''}
-        onInput={onInput}
+        onChange={onInput}
       />
     </div>
   )

@@ -8,8 +8,8 @@ const useMovies = () => {
   const { saveThemeToLocalStorage, loadFromLocalStorage } = useMoviesLocalStorage(THEME_KEY)
 
   const [movies, setMovies] = useState<Movie[]>([
-      {id: 11, title: 'Oregairu', src: '/Oregairu.jpg'},
-      {id: 12, title: 'Oregairu', src: '/Oregairu.jpg'},
+      {id: 11, title: 'Oregairu', src: '/Oregairu.jpg', popularity:1},
+      {id: 12, title: 'EightySix', src: '/EightySixPicture.jpg', popularity:2},
     ])
 
   const totalMovies = movies.length
@@ -55,7 +55,7 @@ const useMovies = () => {
     }
   }, [])
 
-  const loadMore = useCallback(async () => {
+  const loadMore = useCallback(async ():Promise<void> => {
     if(!page) return
 
     const nextPage = page + 1
@@ -85,7 +85,6 @@ const useMovies = () => {
     if (data.results.length === 0) {
       throw new Error('Nothing was found')
     }
-
 
     return data.results
   }

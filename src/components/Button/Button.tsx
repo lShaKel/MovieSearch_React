@@ -3,9 +3,9 @@ import styles from './Button.module.scss'
 
 type ButtonVariant = 'discover' | 'theme' | 'burger'
 type ButtonProps = {
-  className: string,
-  type:'button' | 'submit',
-  variant:ButtonVariant,
+  className?: string,
+  type?:'button' | 'submit',
+  variant?:ButtonVariant,
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void,
 }
 
@@ -25,7 +25,7 @@ const Button = (props:PropsWithChildren<ButtonProps>) => {
     burger: styles.burgerButton
   };
 
-  const classVariants = variants[variant] || '';
+  const classVariants = variant ? variants[variant] : '';
 
   if( variant === 'burger') {
     return (
