@@ -1,33 +1,27 @@
 .header{
-  background: var(--dark-10);
-  width: 100vw;
-  height: 80px;
+  background: rgba(8,15,28, 0.85);
+  min-height: 90px;
 
   display: flex;
   justify-content:space-between;
   align-items: center;
-  padding-inline: 10px;
+  padding: 0 40px;
 
-  color: var(--absolute-white);
+  border-bottom: 1px solid var(--border-primary);
 
 }
 
-.icon{
-  position: relative;
-  padding-left: 7%;
+.logo{
+  font-size: 32px;
   font-weight: 700;
-  font-size: 26px;
+  letter-spacing: -1px;
   pointer-events: none;
+}
 
-  &::before {
-    content: '';
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 50%;
-    left: 17%;
-    translate: -50% -50%;
-    background: url('../../assets/spade.svg') center/contain no-repeat;
+.logoMovie{
+  color: #f4f6fb;
+}
 
-  }
+.logoSearch{
+  color: #6366f1;
 }
