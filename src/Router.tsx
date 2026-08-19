@@ -1,4 +1,20 @@
-import {useEffect, useState} from "react";
+import {type ComponentType, useEffect, useState} from "react";
+
+interface MoviesPageParams{
+  id:string,
+}
+
+export interface RouterRoutes{
+  '/': ComponentType,
+  '/movies/:id':ComponentType<{ params:MoviesPageParams }>,
+  '*':ComponentType,
+}
+
+interface RouterProps {
+  routes: RouterRoutes,
+}
+
+type FallbackRouteKey = Exclude<keyof RouterRoutes, '/movies/:id'>
 
 export const useRoute = () => {
   const [path, setPath] = useState<string>(() => window.location.pathname)
@@ -20,7 +36,7 @@ export const useRoute = () => {
 
 
 
-const Router = (props) => {
+const Router = (props:RouterProps) => {
   const { routes } = props
   const path = useRoute()
 
@@ -31,7 +47,7 @@ const Router = (props) => {
     return <MoviesPage params = {{ id }}/>
   }
 
-  const Page = routes[path] ?? routes['*']
+  const Page = routes[path as FallbackRouteKey] ?? routes['*']
 
   return <Page />
 
