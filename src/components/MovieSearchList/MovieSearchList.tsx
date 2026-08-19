@@ -7,7 +7,6 @@ const MovieSearchList = () => {
 
   const context = useContext(MoviesContext)
   if(context === undefined) {throw new Error('Context is wrong')}
-
   const {
     movies = [],
     filter,

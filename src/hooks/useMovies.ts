@@ -66,13 +66,11 @@ const useMovies = () => {
     searchMovies(nextPage, queryToUse, mode).catch(error => error)
   }, [page, mode, searchMovies])
 
-
   const fetchMovies = async (params: Record<string, string | number>, endpoint:MoviesEndPoint) => {
     const queryParams = new URLSearchParams({
-      api_key: 'b1229af585e82db703e1a1cd074ea253',
+      api_key: import.meta.env.VITE_TMDB_API_KEY,
       ...params
     })
-
     const url = `https://api.themoviedb.org/3/${endpoint}?${queryParams}`
     const response = await fetch(url)
 
