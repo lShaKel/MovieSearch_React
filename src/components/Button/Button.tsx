@@ -1,7 +1,7 @@
 import type {PropsWithChildren, MouseEvent} from "react";
 import styles from './Button.module.scss'
 
-type ButtonVariant = 'discover' | 'theme' | 'burger'
+type ButtonVariant =  'burger' | 'search' | 'basic'
 type ButtonProps = {
   className?: string,
   type?:'button' | 'submit',
@@ -20,9 +20,9 @@ const Button = (props:PropsWithChildren<ButtonProps>) => {
   } = props
 
   const variants:Record<ButtonVariant, string | undefined> = {
-    discover: styles.discoverButton,
-    theme: 'theme-changer',
-    burger: styles.burgerButton
+    basic: styles.discoverButton,
+    burger: styles.burgerButton,
+    search: styles.searchButton,
   };
 
   const classVariants = variant ? variants[variant] : '';

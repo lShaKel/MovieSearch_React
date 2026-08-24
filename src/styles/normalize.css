@@ -206,3 +206,9 @@ svg * {
     scroll-behavior: auto !important;
   }
 }
+
+
+.no-transition,
+.no-transition * {
+  transition: none !important;
+}

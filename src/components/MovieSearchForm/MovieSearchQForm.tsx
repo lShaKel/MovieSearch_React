@@ -1,6 +1,6 @@
 import {type ChangeEvent, type SyntheticEvent, useContext} from "react";
 import {MoviesContext} from "../../context/MoviesContext";
-import Field from "../Field.js";
+import Field from "../Field/Field.js";
 import Button from "../Button/Button";
 import styles from './MovieSearchQForm.module.scss'
 
@@ -34,6 +34,7 @@ const MovieSearchQForm = () => {
       <Button
         className = "search__form-button "
         type = "submit"
+        variant= 'search'
       >
         Search query
       </Button>

@@ -1,4 +1,5 @@
 import {type ChangeEvent, memo, type PropsWithChildren} from "react";
+import styles from './Field.module.scss'
 
 type FieldProps = {
   id: string,
@@ -15,15 +16,15 @@ const Field =  (props:PropsWithChildren<FieldProps>) => {
   } = props
 
   return (
-    <div className="Field">
+    <div className={styles.field}>
       <label
         htmlFor={id}
-        className="search__form-label"
+        className={styles.label}
       >
         {children}
       </label>
       <input
-        className="search__form-input"
+        className={styles.input}
         id={id}
         placeholder=" "
         autoComplete="off"

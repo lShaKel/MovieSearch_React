@@ -30,4 +30,31 @@
   --radius-small: 8px;
   --radius-medium: 12px;
   --radius-large: 16px;
+
+  --button-basic-start:rgba(16,27,45,0.7);
+  --button-basic-end:rgba(8, 33, 58, 0.7);
+
+  body .white{
+    --bg-primary: #f3f5f9;
+    --bg-secondary: #ffffff;
+    --bg-card: #ffffff;
+    --bg-input: #ffffff;
+
+    --border-primary: #dce1ea;
+    --border-hover: #c5ccda;
+
+    --text-primary: #172033;
+    --text-secondary: #667085;
+    --text-muted: #98a2b3;
+
+    --accent: #5b5ce2;
+    --accent-hover: #4f50d5;
+    --accent-light: #716ff0;
+
+    --shadow:
+      0 10px 30px rgba(31, 41, 55, 0.08);
+
+    --button-basic-start:rgba(255, 255, 255, 0.9);
+    --button-basic-end:rgba(232, 235, 255, 0.9);
+  }
 }

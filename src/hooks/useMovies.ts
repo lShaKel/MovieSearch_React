@@ -83,7 +83,7 @@ const useMovies = () => {
     if (data.results.length === 0) {
       throw new Error('Nothing was found')
     }
-
+  console.log(data)
     return data.results
   }
 
@@ -104,8 +104,14 @@ const useMovies = () => {
   }, [mode, page, searchMovies])
 
   useEffect(() => {
+    document.body.classList.add('no-transition')
     document.body.classList.toggle('white', !isDarkMode)
 
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.body.classList.remove('no-transition')
+      })
+    })
     saveThemeToLocalStorage(isDarkMode)
   }, [isDarkMode])
 

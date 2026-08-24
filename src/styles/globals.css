@@ -1,14 +1,10 @@
-body {
+html, body{
   margin: 0;
-  min-height: 100vh;
+  min-height: 100%;
 
-  background:
-    radial-gradient(
-      circle at 50% 0%,
-      #18264a 0%,
-      #080f1c 45%
-    );
-
+  background: #0a1220;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: var(--text-primary);
 
   font-family:
@@ -18,4 +14,8 @@ body {
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
+}
+
+body.white{
+  background:#e8ebff;
 }
