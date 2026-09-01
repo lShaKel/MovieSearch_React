@@ -37,21 +37,21 @@ const useMovies = () => {
       }
 
       if (modeToUse === 'query') {
-        if (!queryToUse.trim()) return
-
         lastQueryRef.current = queryToUse
         searchMovies = await fetchMovies({query:queryToUse,page: pageToUse}, 'search/movie')
-        setQuery('')
       }
 
       setMovies(prev => {
         const uniqueMovies:Movie[] = searchMovies.filter(
           movie => !prev.some(prevMovie => prevMovie.id === movie.id)
+
         )
         return [...prev, ...uniqueMovies]
       })
     } catch (err) {
       setMovies([])
+    } finally {
+      setQuery('')
     }
   }, [])
 
@@ -83,7 +83,6 @@ const useMovies = () => {
     if (data.results.length === 0) {
       throw new Error('Nothing was found')
     }
-  console.log(data)
     return data.results
   }
 
@@ -96,12 +95,6 @@ const useMovies = () => {
 
     return neededMovie
   }
-
-  useEffect(() => {
-    if(page === null) return
-
-    searchMovies(page, query, mode).catch(err => err)
-  }, [mode, page, searchMovies])
 
   useEffect(() => {
     document.body.classList.add('no-transition')
@@ -120,12 +113,18 @@ const useMovies = () => {
     setMode('discover')
     setPage(1)
     setMovies([])
+    searchMovies(1,'', 'discover').catch(err => err)
   }
 
   const handleQuery = () => {
+    if(query.trim().length === 0) {
+      return
+    }
+
     setMode('query')
     setPage(1)
     setMovies([])
+    searchMovies(1,query, 'query').catch(err => err)
   }
 
   const handleFilter = () => {

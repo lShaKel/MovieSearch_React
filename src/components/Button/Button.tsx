@@ -2,6 +2,7 @@ import type {PropsWithChildren, MouseEvent} from "react";
 import styles from './Button.module.scss'
 
 type ButtonVariant =  'burger' | 'search' | 'basic'
+
 type ButtonProps = {
   className?: string,
   type?:'button' | 'submit',

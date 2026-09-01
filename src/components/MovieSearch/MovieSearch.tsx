@@ -15,7 +15,6 @@ const MovieSearch = () => {
   const {
     isDarkMode,
     handleDiscover,
-    themeChange,
   } = context
 
   const DiscoverButton = () => {
