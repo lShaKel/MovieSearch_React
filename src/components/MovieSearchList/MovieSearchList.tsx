@@ -10,6 +10,7 @@ const MovieSearchList = () => {
   const {
     movies = [],
     filter,
+    madeFirstFetch,
   } = context
 
   const listToRender = useMemo(() => {
@@ -20,9 +21,15 @@ const MovieSearchList = () => {
     return movies
   }, [movies, filter])
 
-  if(listToRender.length === 0 ) {
+  if(listToRender.length === 0 && madeFirstFetch) {
     return (
       <div className={styles.searchEmptyMessage}>Nothing there</div>
+    )
+  }
+
+  if(listToRender.length === 0 && !madeFirstFetch){
+    return(
+      <div className={styles.searchEmptyMessage}>Find the movie you like :)</div>
     )
   }
 

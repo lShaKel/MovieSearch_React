@@ -17,6 +17,8 @@ const useMovies = () => {
   const [query, setQuery] = useState<string>('')
   const [filter, setFilter] = useState<MoviesFilters>('all')
 
+  const [madeFirstFetch, setMadeFirstFetch] = useState(false)
+
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() => loadFromLocalStorage())
 
   const lastQueryRef = useRef('')
@@ -49,6 +51,7 @@ const useMovies = () => {
       setMovies([])
     } finally {
       setQuery('')
+      setMadeFirstFetch(true)
     }
   }, [])
 
@@ -142,13 +145,14 @@ const useMovies = () => {
     filter,
     query,
     isDarkMode,
+    madeFirstFetch,
     setQuery,
     handleQuery,
     handleDiscover,
     loadMore,
     handleFilter,
     themeChange,
-    getMovieById
+    getMovieById,
   }
 }
 
