@@ -7,10 +7,7 @@ const useMovies = () => {
   const THEME_KEY = 'isDarkTheme'
   const { saveThemeToLocalStorage, loadFromLocalStorage } = useMoviesLocalStorage(THEME_KEY)
 
-  const [movies, setMovies] = useState<Movie[]>([
-      {id: 11, title: 'Oregairu', src: '/Oregairu.jpg', popularity:1},
-      {id: 12, title: 'EightySix', src: '/EightySixPicture.jpg', popularity:2},
-    ])
+  const [movies, setMovies] = useState<Movie[]>([])
 
   const totalMovies = movies.length
   const hasMovies = totalMovies > 0
