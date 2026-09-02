@@ -1,8 +1,8 @@
 import {useContext, useEffect, useState} from "react";
-import Loader from "../../components/Loader/Loader";
 import {MoviesContext} from "../../context/MoviesContext";
-import styles from './MoviesPage.module.scss'
 import type {Movie} from "../../util/movies.types";
+import Header from "../../components/Header/Header";
+import styles from './MoviesPage.module.scss'
 
 type MoviePageProps = {
   params: {
@@ -21,7 +21,6 @@ const MoviesPage = (props:MoviePageProps) => {
   const { getMovieById } = context
 
   const [movie, setMovie] = useState<Movie | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [hasError, setHasError] = useState<boolean>(false)
 
   useEffect(() => {
@@ -32,17 +31,9 @@ const MoviesPage = (props:MoviePageProps) => {
         setHasError(false)
       } catch (error) {
         setHasError(true)
-      } finally {
-        setTimeout(() => {        setIsLoading(false)}, 500)
       }
 
   }, [movieId, getMovieById])
-
-  if(isLoading) {
-    return (
-      <Loader/>
-    )
-  }
 
   if(hasError) {
     return <div>Movie not found</div>
@@ -62,18 +53,22 @@ const MoviesPage = (props:MoviePageProps) => {
     : src ?? 'unlucky.jpg'
 
   return(
-    <div className={styles.Movie_page}>
-      <h1>{title}</h1>
-      <p>Average rating:{vote_average}</p>
+    <div className={styles.MoviePage}>
+      <Header />
+    <div className={styles.movieDetails}>
+      <h1 className={styles.title}>{title}</h1>
+      <h2 className={styles.rating}>Average rating: {vote_average}</h2>
       <img
+        className={styles.moviePoster}
         src={path}
         alt= 'Poster of the film'
         width="320px"
         height="400px"
       />
-      <p>{overview}</p>
+      <p className={styles.overview}>{overview}</p>
     </div>
-  )
+      </div>
+      )
 }
 
 export default MoviesPage

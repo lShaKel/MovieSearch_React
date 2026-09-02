@@ -5,7 +5,7 @@ export interface Movie{
   poster_path?:string,
   popularity:number,
   backdrop_path?:string,
-  overview?:number,
+  overview?:string,
   vote_average?:number,
 
 }

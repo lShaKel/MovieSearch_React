@@ -23,7 +23,7 @@ const MovieSearchItem = (props:ItemProps) => {
   return (
     <li className={styles.search__results}>
       <RouterLink to={`/movies/${id}`}>
-        <p>{title}</p>
+      <p>{title}</p>
       </RouterLink>
       <img className={styles.img}
         src={path}
